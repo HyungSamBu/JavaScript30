@@ -71,45 +71,26 @@
   </style>
 
   <script>
-    //Variables
     const secondHand = document.querySelector('.second-hand');
-    const minuteHand = document.querySelector('.min-hand');
-    const hourHand = document.querySelector('hour-hand');
+    const minsHand = document.querySelector('.min-hand');
+    const hourHand = document.querySelector('.hour-hand');
+  
+  function setDate() {
+    const now = new Date();
+    const seconds = now.getSeconds();
+    const secondsDegrees = ((seconds / 60) * 360) + 90;
+    secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+    
+    const mins = now.getMinutes();
+    const minsDegrees = ((mins / 60) * 360) + ((seconds/60)*6) + 90;
+    minsHand.style.transform = `rotate(${minsDegrees}deg)`;
 
-    function setSeconds() {
-      const now = new Date();
-      const seconds = now.getSeconds();
-
-      //Second Hand
-      const secondsDegrees = ((seconds/60) * 360) + 90;
-      secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
-
-    }
-
-    function setMinutes() {
-      const now = new Date();
-      const minutes = now.getMinutes();
-
-      //Minute hand
-      const minuteDegrees = ((minutes/60) *360) + 90;
-      minuteHand.style.transform = `rotate(${minuteDegrees}deg)`;
-    }
-
-    function setHour()) {
-      const now = new Date();
-      const hour = now.getHour();
-
-      //Minute hand
-      const hourDegrees = ((hour/12) *360) + 90;
-      hourHand.style.transform = `rotate(${hourDegrees}deg)`;
-    }
-
-
-
-
-    setInterval(setSeconds, 1000);
-    setInterval(setMinutes, 60000);
-    setInterval(setHour, (60 * 60000));
+    const hour = now.getHours();
+    const hourDegrees = ((hour / 12) * 360) + ((mins/60)*30) + 90;
+    hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+  }
+  setInterval(setDate, 1000);
+  setDate();
 
   </script>
 </body>
